@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
-namespace StrToByte
+namespace Hashing2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Enter text: ");
-            string text = Console.ReadLine(); 
-            byte[] barr= Encoding.UTF8.GetBytes(text);
-            Console.WriteLine(barr);
+            string text = Console.ReadLine();
+            {
+                Console.WriteLine("MD5 hash of string \'" + text + "\' : ");
+            }
             Console.ReadLine();
         }
     }
