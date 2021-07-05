@@ -1,20 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+
 namespace StrToByte
 {
     class Program
     {
         static void Main(string[] args)
         {
-            const string inputSring = "Hello World";
-            byte[] bArray = Encoding.ASCII.GetBytes(inputSring);
-            foreach (byte bElements in bArray)
+            string str = "Helo World.";
+            
+            //reading all characters as byte and storing them to byte[]
+            byte[] barr = Encoding.ASCII.GetBytes(str);
+
+            //printing characters with byte values
+            for(int loop =0; loop<barr.Length-1; loop++)
             {
-                Console.WriteLine("{0} = {1}",  (char)bElements,  bElements);
-                Console.ReadLine();
+                Console.WriteLine("Byte of char \'" + str[loop] + "\' : " + barr[loop]);
             }
+
+            //hit ENTER to exit
+            Console.ReadLine();
         }
+        
     }
 }
