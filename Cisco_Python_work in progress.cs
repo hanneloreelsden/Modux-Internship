@@ -12,29 +12,28 @@ namespace Cisco_Python_work
         static void Decrypter(string pw)
         {
             var index = Int32.Parse(pw.Substring(0,2));
-            var enc_pw = pw.Substring(2).Trim();
+            string enc_pw = pw.Substring(2).Trim();
+            // Create the cleartext list
+            string cleartext = string.Empty;
             for(int i=0; i<enc_pw.Length; i+=2)
             {
                 var hex_pw = enc_pw.Substring(i,i+2);
+                foreach (int j in Enumerable.Range(0, hex_pw.Length))
+                {
+                    var cur_index = (j+index) % 53;
+                    var cur_salt = (salt.Substring(cur_index));
+                    var cur_hex_int = Int32.Parse(hex_pw.Substring(j,16));
+                    //var cleartext_char = cur_salt ^ cur_hex_int;  
+                }
             }
-            // Create the cleartext list
-            string cleartext = string.Empty;
-            foreach (int i in Enumerable.Range(0, hex_pw.Length))
-            {
-                var cur_index = (i+index) % 53;
-                var cur_salt = Encoding.UTF8.GetBytes(salt[cur_index]);
-                //
-                var cur_hex_int =;
-                var cleartext_char = cur_salt ^ cur_hex_int;  
-
-            }
+            Console.WriteLine(cleartext);
         }
         
         
         static void Main()
         {
             //input password here
-            //Decrypter();
+            Decrypter("02000D490E110E2D40000A01");
         }
     }
 }
