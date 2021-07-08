@@ -2,12 +2,13 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Net;
+using idHash.idHash;
 
 namespace Hashing2
 {
-    class calcHash
+    static class calcHash
     {   
-        static void calculateMD5()
+        public static void calculateMD5()
         {
             Console.WriteLine("Enter text to convert to MD5: ");
             string str = Console.ReadLine();
@@ -22,9 +23,8 @@ namespace Hashing2
             }
         }
         
-        static void calculateSHA256()
+        public static void calculateSHA256()
         {
-            // Here, need to solve error which comes as not displaying text "SHA256"
             Console.WriteLine("Enter text to convert to SHA-256: ");
             string str1 = Console.ReadLine();
             var text1 = (str1);
@@ -39,10 +39,12 @@ namespace Hashing2
         }
 
         static void Main()
-        { 
+        {  
             calculateMD5(); // Calling method
             calculateSHA256(); // Calling method
             Console.ReadLine(); 
+            identifyHash(); // Calling method from other static class
+            Console.ReadLine();
         }   
     }
 }
