@@ -6,32 +6,37 @@ using System.Collections.Generic;
 
 namespace Cisco_Python_work
 {
-    static class decryption
+    public class decryption
     {
-        static string salt = "dsfd;kfoA,.iyewrkldJKDHSUBsgvca69834ncxv9873254k;fg87";
+        public static string salt = "dsfd;kfoA,.iyewrkldJKDHSUBsgvca69834ncxv9873254k;fg87";
 
-        static void Decrypter(string pw)
+        public static string Decrypter(string pw)
         {
             int index = Int32.Parse(pw.Substring(0,2));
             string enc_pw = pw.Substring(2).Trim();
-            Console.WriteLine(enc_pw);
-            string hex_pw = string.Empty;
-            for(int i=0; i<enc_pw.Length; i+=2)
+            string[] hex_pw = new string[pw.Length/2];
+            for (int i=0; i<pw.Length/2-1; i++)
             {
-                hex_pw+=(enc_pw.Substring(i,2));
+                hex_pw[i] = enc_pw.Substring(2*i,2);
             }
-            Console.WriteLine(hex_pw);
-            // Create the cleartext list
-            string cleartext = string.Empty;
-            for(int i=0; i<hex_pw.Length; i+=1)
+            string[] cleartext = new string[hex_pw.Length];
+            for (int i=0; i<hex_pw.Length-1; i++)
             {
                 int cur_index = (i+index) % 53;
-                var cur_salt = Char.ConvertToUtf32(salt,cur_index);
-                int cur_hex_int = Int32.Parse(hex_pw.Substring(i,i));
-                var cleartext_char = cur_salt ^ cur_hex_int;  
-                cleartext+=Char.ConvertFromUtf32(cleartext_char);
+                int cur_salt = salt[cur_index];
+                int cur_hex_int = Convert.ToInt32(hex_pw[i], 16); 
+                int cleartext_int = cur_salt ^ cur_hex_int;
+                char cleartext_char = Convert.ToChar(cleartext_int);
+                string cleartext_str = Convert.ToString(cleartext_char);
+                cleartext[i] = cleartext_str;
             }
-            Console.WriteLine(cleartext);
+            string result = "";
+            foreach (string str in cleartext)
+            {
+                result = result + str;
+            }
+            Console.WriteLine(result);
+            return result;
         }
         
         
